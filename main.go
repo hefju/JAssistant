@@ -10,6 +10,7 @@ import (
 )
 func main(){
     router := gin.Default()
+    router.LoadHTMLGlob("templates/*")
     router.GET("/", func(c *gin.Context) { //测试，获取数据表信息
         // log.Println("visit homepage\r\n")
         logger.Debug("visit homepage")
@@ -22,6 +23,11 @@ func main(){
         c.String(http.StatusOK, time.Now().Format("2006-01-02 15:04:05"))
     })
 
+    router.GET("/index", func(c *gin.Context) {
+        obj := gin.H{"title": "JAssistant"}
+        c.HTML(http.StatusOK, "index.html", obj)
+    })
+
     router.POST("/report", receiveReport)       //批量上传数据
 
     router.Run(":8085")
@@ -32,7 +38,7 @@ func main(){
 func receiveReport(c *gin.Context) {
     var json models.StatusReport
     c.Bind(&json)
-    json.ServerTime=time.Now()
+    json.ServerTime=time.Now() //设置服务器本地时间
     count := models.InsertStatus(json)
     logger.Debug("upload插入结果:", count)
     result:="JAssistant 操作失败"

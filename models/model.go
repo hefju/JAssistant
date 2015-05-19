@@ -48,6 +48,6 @@ type StatusReport struct  {
     FromTime time.Time  //发送的时间
     Title string //标题(分类: 健康,统计的,)
     Content string //详细内容
-    ServerTime time.Time
+    ServerTime time.Time //服务器时间
 }
 
