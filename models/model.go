@@ -6,7 +6,6 @@ import (
     "github.com/hefju/JAssistant/myconfig"
     _"github.com/mattn/go-sqlite3"
     "fmt"
-    "time"
 )
 
 var engine *xorm.Engine
@@ -45,9 +44,11 @@ func InsertStatus(status StatusReport)int64{
 type StatusReport struct  {
     Id int64
     From string      //发送人
-    FromTime time.Time  //发送的时间
+    FromTime int64  //发送的时间
     Title string //标题(分类: 健康,统计的,)
     Content string //详细内容
-    ServerTime time.Time //服务器时间
+    ServerTime int64 //服务器时间
+    CreatedAt  int64  `xorm:"created"`
+    UpdatedAt  int64  `xorm:"updated"`
 }
 

@@ -38,7 +38,7 @@ func main(){
 func receiveReport(c *gin.Context) {
     var json models.StatusReport
     c.Bind(&json)
-    json.ServerTime=time.Now() //设置服务器本地时间
+    json.ServerTime=time.Now().Unix() //设置服务器本地时间
     count := models.InsertStatus(json)
     logger.Debug("upload插入结果:", count)
     result:="JAssistant 操作失败"
