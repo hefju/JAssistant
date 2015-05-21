@@ -6,6 +6,7 @@ import (
     "github.com/hefju/JAssistant/myconfig"
     _"github.com/mattn/go-sqlite3"
     "fmt"
+    "time"
 )
 
 var engine *xorm.Engine
@@ -37,6 +38,17 @@ func InsertStatus(status StatusReport)int64{
         log.Fatalln("insert StatusReport",err)
     }
     return affected
+}
+
+func GetStatusCount(date time.Time) int64 {
+    date=date.Add(-time.Hour)
+    tick:=date.Unix()
+    status := new(StatusReport)
+    total, err := engine.Where("FromTime >?", tick).Count(status)
+    if err!=nil{
+        log.Fatalln("GetStatusCount",err)
+    }
+    return total
 }
 
 

@@ -7,6 +7,7 @@ import (
     "time"
     "github.com/hefju/JAssistant/myconfig"
     "github.com/hefju/JAssistant/models"
+    "github.com/hefju/JAssistant/runmonitor"
 )
 func main(){
     router := gin.Default()
@@ -29,6 +30,8 @@ func main(){
     })
 
     router.POST("/report", receiveReport)       //批量上传数据
+
+    runmonitor.Start()//运行状态监视器
 
     router.Run(":8085")
     fmt.Println("end")
