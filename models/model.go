@@ -16,7 +16,7 @@ func init() {
     var err error
     //	engine, err = xorm.NewEngine("odbc", "driver={SQL Server};Server=192.168.1.200; Database=charge; uid=sa; pwd=123;")
   //  engine, err = xorm.NewEngine("odbc", "driver={SQL Server};server=.;database=charge;integrated security=SSPI;")
-    engine, err =  xorm.NewEngine("sqlite3", myconfig.AppRootPath+"/test.db")
+    engine, err =  xorm.NewEngine("sqlite3", myconfig.AppRootPath+"/test2.db")
 
     if err != nil {
         log.Fatalln("xorm create error", err)

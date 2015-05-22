@@ -3,15 +3,21 @@ package runmonitor
 import (
     "time"
     "fmt"
+    "github.com/hefju/JAssistant/models"
 )
 
 func Start(){
     go func(){
-        tk:=time.NewTicker(time.Second)
+        tk:=time.NewTicker(time.Hour)
         for t := range tk.C {
 
-            //
-            fmt.Println(t)
+          count:=  models. GetStatusCount(t)
+            if count<5{
+                fmt.Println("一个小时内状态报告小于5, 需要警报. SentEmail")
+            }
+
+
+           // fmt.Println(t)
         }
     }()
 }
